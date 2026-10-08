@@ -1,0 +1,139 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,300..600;1,7..72,300..600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+html {
+  background: #f2ede3;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+body {
+  background: #f2ede3;
+  color: #12110f;
+  font-family: Inter, system-ui, sans-serif;
+}
+::selection {
+  background: #b5762f;
+  color: #f2ede3;
+}
+:focus-visible {
+  outline: 1.5px solid #b5762f;
+  outline-offset: 4px;
+}
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+/* Paper texture — a single static noise layer, GPU-cheap */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+/* Underline that draws itself */
+.link-line {
+  position: relative;
+}
+.link-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.link-line:hover::after,
+.link-line:focus-visible::after,
+.link-line[aria-current='page']::after,
+.link-line[data-active='true']::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: #12110f;
+  color: #f2ede3;
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: top 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.skip-link:focus {
+  top: 1rem;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
+}
+.writing-area::placeholder {
+  color: var(--w-mute, #6e685f);
+  font-style: italic;
+  opacity: 0.8;
+}
+/* Hairline range inputs */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 18px;
+  background: transparent;
+  color: inherit;
+}
+.range::-webkit-slider-runnable-track {
+  height: 1px;
+  background: color-mix(in srgb, currentColor 35%, transparent);
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  margin-top: -5.5px;
+  border-radius: 9999px;
+  background: currentColor;
+}
+.range::-moz-range-track {
+  height: 1px;
+  background: color-mix(in srgb, currentColor 35%, transparent);
+}
+.range::-moz-range-thumb {
+  height: 12px;
+  width: 12px;
+  border: 0;
+  border-radius: 9999px;
+  background: currentColor;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
